@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DtvizmessagesComponent } from './dtvizmessages.component';
 
 //import 'rxjs/add/operator/toPromise';
 //import { Observable } from 'rxjs/Observable';
@@ -10,14 +11,24 @@ export class WebService {
     
     uBASE_URL = 'http://localhost:5000/api';
 
-    constructor(private http: HttpClient) { }
+    
 
-    getMessages(){
-        return this.http.get(this.uBASE_URL + '/dtvizmessages').toPromise();
+    dtvizmessages : DtvizmessagesComponent[]
+
+
+
+    constructor(private http: HttpClient) {
+        this.getMessages();
+     }
+
+    async getMessages(){
+        var response = await this.http.get<DtvizmessagesComponent[]>(this.uBASE_URL + '/dtvizmessages').toPromise();
+        this.dtvizmessages = response;
     }
 
-    postMessage(dtm){
-        return this.http.post(this.uBASE_URL + '/dtvizmessages', dtm).toPromise();
+    async postMessage(dtm){
+        var response = this.http.post(this.uBASE_URL + '/dtvizmessages', dtm).toPromise();
+        this.dtvizmessages.push(dtm);
     }
 
 }

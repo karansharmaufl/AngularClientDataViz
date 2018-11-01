@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { WebService } from './web.service';
 
 // Placeholder template
@@ -22,7 +22,7 @@ import { WebService } from './web.service';
 
 export class NewDtvizmessagesComponent {
 
-    @Output() onPosted = new EventEmitter();
+    
     constructor(private webService : WebService) {}
 
     dtvizmessage = {
@@ -33,6 +33,5 @@ export class NewDtvizmessagesComponent {
 
     post() {
         this.webService.postMessage(this.dtvizmessage);
-        this.onPosted.emit(this.dtvizmessage);
     }
 }

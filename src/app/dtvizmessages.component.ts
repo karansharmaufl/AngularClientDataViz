@@ -6,7 +6,7 @@ import { WebService } from './web.service';
 @Component({
     selector: 'app-dtvizmessages',
     template: `
-        <div *ngFor = "let dtm of dtvizmessages">
+        <div *ngFor = "let dtm of webService.dtvizmessages">
             <mat-card style="margin: 8px;">
                 <mat-card-title> {{dtm.owner}} </mat-card-title>
                 <mat-card-content>{{dtm.text}}</mat-card-content>
@@ -16,14 +16,5 @@ import { WebService } from './web.service';
 })
 
 export class DtvizmessagesComponent {
-        constructor(private webService : WebService) {}
-
-async ngOnInit() {
-    var response = await this.webService.getMessages();
-    console.log('RESPONSEDATA', response);
-    console.log('RESPONSETYPE', typeof(response));
-    this.dtvizmessages = response;
-}
-
-    dtvizmessages;
+    constructor(private webService : WebService) {}
 }
