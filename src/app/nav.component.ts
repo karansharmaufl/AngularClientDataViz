@@ -7,8 +7,10 @@ import { Component } from '@angular/core';
     selector: 'app-nav',
     template: `
         <mat-toolbar color="primary">
-            Dashboard
+            <button mat-button routerLink="/">RtDataViz</button>
+            <button mat-button routerLink="/dtvizmessages">DTMessages</button>
         </mat-toolbar>
+        
     `
 })
 

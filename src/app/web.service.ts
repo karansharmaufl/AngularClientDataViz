@@ -16,8 +16,6 @@ export class WebService {
 
     dtvizmessages : DtvizmessagesComponent[]
 
-
-
     constructor(private http: HttpClient, private sb: MatSnackBar) {
         this.getMessages();
      }
@@ -26,7 +24,7 @@ export class WebService {
         try{
             
             var response = await this.http.get<DtvizmessagesComponent[]>(this.uBASE_URL + '/dtvizmessages').toPromise();
-            this.dtvizmessages = response;
+            this.dtvizmessages = response;  // Adding data instantly
             
         }catch(error){
             this.handleError("Unable to get messages");
@@ -37,7 +35,7 @@ export class WebService {
     async postMessage(dtm){
         try{
             var response = this.http.post(this.uBASE_URL + '/dtvizmessages', dtm).toPromise();
-            this.dtvizmessages.push(dtm);
+            this.dtvizmessages.push(dtm);  // Adding data instantly
         }catch(error){
             this.handleError("Unable to post messages");
         }

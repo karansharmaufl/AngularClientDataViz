@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { WebService } from './web.service';
+import { ActivatedRoute } from '@angular/router';
 
 // Placeholder template
 
@@ -8,7 +9,7 @@ import { WebService } from './web.service';
     template: `
         <div *ngFor = "let dtm of webService.dtvizmessages">
             <mat-card style="margin: 8px;">
-                <mat-card-title> {{dtm.owner}} </mat-card-title>
+                <mat-card-title [routerLink]="['/dtvizmessages', dtm.owner]" style="cursor:pointer"> {{dtm.owner}} </mat-card-title>
                 <mat-card-content>{{dtm.text}}</mat-card-content>
             </mat-card>
         </div>
@@ -16,5 +17,9 @@ import { WebService } from './web.service';
 })
 
 export class DtvizmessagesComponent {
-    constructor(private webService : WebService) {}
+    constructor(private webService : WebService, private route: ActivatedRoute) {}
+
+    ngOnInit(){
+        console.log('ROUTE_HERE', this.route.snapshot.params.name);
+    }
 }

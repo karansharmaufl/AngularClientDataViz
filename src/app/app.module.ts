@@ -21,6 +21,10 @@ var routes = [
   component: HomeComponent
   },
   {
+    path: 'dtvizmessages/:name', 
+    component: DtvizmessagesComponent
+  },
+  {
     path: 'dtvizmessages', 
     component: DtvizmessagesComponent
   }
