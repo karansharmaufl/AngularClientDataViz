@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DtvizmessagesComponent } from './dtvizmessages.component';
 import { MatSnackBar } from '@angular/material';
+import { Subject } from 'rxjs';
 
 //import 'rxjs/add/operator/toPromise';
 //import { Observable } from 'rxjs/Observable';
@@ -14,27 +15,33 @@ export class WebService {
 
     
 
-    dtvizmessages : DtvizmessagesComponent[]
+    dtmSubject = new Subject();
+    
+    private dtvizmessages : DtvizmessagesComponent[]
+
+    // Using messages as subject -> WHen update through http request takes place
 
     constructor(private http: HttpClient, private sb: MatSnackBar) {
-        this.getMessages();
+        this.getMessages('');
      }
 
-    async getMessages(){
-        try{
-            
-            var response = await this.http.get<DtvizmessagesComponent[]>(this.uBASE_URL + '/dtvizmessages').toPromise();
-            this.dtvizmessages = response;  // Adding data instantly
-            
-        }catch(error){
-            this.handleError("Unable to get messages");
-        }
-        
+    getMessages(user){
+        user = (user) ? '/'+user : '';
+        // Subscribe using observables
+        var response = this.http.get<DtvizmessagesComponent[]>(this.uBASE_URL + '/dtvizmessages' + user).subscribe(response => {
+            this.dtvizmessages = response;
+            this.dtmSubject.next(this.dtvizmessages);
+        },
+            error => {
+                this.handleError("Unable get messages");
+            }
+        );
+            // Adding data instantly
     }
 
-    async postMessage(dtm){
+    postMessage(dtm){
         try{
-            var response = this.http.post(this.uBASE_URL + '/dtvizmessages', dtm).toPromise();
+            var response = this.http.post(this.uBASE_URL + '/dtvizmessages', dtm);
             this.dtvizmessages.push(dtm);  // Adding data instantly
         }catch(error){
             this.handleError("Unable to post messages");
@@ -42,10 +49,35 @@ export class WebService {
         
     }
 
+    // Use snack bar at bottom to add error message
     private handleError(error){
         console.log(error);
         this.sb.open(error, 'close', {duration:2000});
     }
 
 }
+
+
+//Using async and await
+// async getMessages(user){
+//     try{
+//         user = (user) ? '/'+user : '';
+//         var response = await this.http.get<DtvizmessagesComponent[]>(this.uBASE_URL + '/dtvizmessages' + user).toPromise();
+//         this.dtvizmessages = response;  // Adding data instantly
+        
+//     }catch(error){
+//         this.handleError("Unable to get messages");
+//     }
+    
+// }
+
+// async postMessage(dtm){
+//     try{
+//         var response = this.http.post(this.uBASE_URL + '/dtvizmessages', dtm).toPromise();
+//         this.dtvizmessages.push(dtm);  // Adding data instantly
+//     }catch(error){
+//         this.handleError("Unable to post messages");
+//     }
+    
+// }
 
