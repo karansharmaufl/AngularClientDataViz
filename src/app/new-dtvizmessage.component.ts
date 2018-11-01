@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { WebService } from './web.service';
 
 // Placeholder template
@@ -9,10 +9,10 @@ import { WebService } from './web.service';
         <mat-card class="card">
             <mat-card-content>
                 <mat-form-field>
-                    <input [(ngModel)]="owner" matInput placeholder="Name">
+                    <input [(ngModel)]="dtvizmessage.owner" matInput placeholder="Name">
                 </mat-form-field><br/>
                 <mat-form-field>
-                    <textarea matInput placeholder="Message"></textarea>
+                    <textarea [(ngModel)] = "dtvizmessage.text" matInput placeholder="Message"></textarea>
                 </mat-form-field><br/>
                 <button (click) = "post()" mat-button color="primary">POST</button>                
             </mat-card-content>
@@ -21,12 +21,18 @@ import { WebService } from './web.service';
 })
 
 export class NewDtvizmessagesComponent {
-        constructor(private webService : WebService) {}
- 
-        owner = "tester";
+
+    @Output() onPosted = new EventEmitter();
+    constructor(private webService : WebService) {}
+
+    dtvizmessage = {
+        owner: "",
+        text: ""
+    }
 
 
-        post() {
-            console.log(this.owner);
-        }
+    post() {
+        this.webService.postMessage(this.dtvizmessage);
+        this.onPosted.emit(this.dtvizmessage);
+    }
 }

@@ -8,10 +8,17 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class WebService {
     
+    uBASE_URL = 'http://localhost:5000/api';
+
     constructor(private http: HttpClient) { }
 
     getMessages(){
-        return this.http.get('http://localhost:5000/api/dtvizmessages').toPromise();
+        return this.http.get(this.uBASE_URL + '/dtvizmessages').toPromise();
     }
+
+    postMessage(dtm){
+        return this.http.post(this.uBASE_URL + '/dtvizmessages', dtm).toPromise();
+    }
+
 }
 
