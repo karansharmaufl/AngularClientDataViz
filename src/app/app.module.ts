@@ -6,6 +6,7 @@ import { DtvizmessagesComponent } from './dtvizmessages.component';
 import { NewDtvizmessagesComponent } from  './new-dtvizmessage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { NavComponent } from  './nav.component';
 import { 
   MatButtonModule,
   MatCardModule,
@@ -24,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     DtvizmessagesComponent, 
-    NewDtvizmessagesComponent
+    NewDtvizmessagesComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
