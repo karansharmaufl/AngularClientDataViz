@@ -15,22 +15,53 @@ export class WebService {
 
     
 
-    dtmSubject = new Subject();
+    //private dtmSubject = new Subject();
     
-    private dtvizmessages : DtvizmessagesComponent[]
+    //private dtvizmessagesStore : DtvizmessagesComponent[]
+
+    //dtvizmessages = this.dtmSubject.asObservable();
+
+    dtvizmessages : DtvizmessagesComponent[]
 
     // Using messages as subject -> WHen update through http request takes place
 
     constructor(private http: HttpClient, private sb: MatSnackBar) {
-        this.getMessages('');
+        //this.getMessages('');
      }
+     
+        //Using async and await
+        async getMessages(user){
+        try{
+            user = (user) ? '/'+user : '';
+            var response = await this.http.get<DtvizmessagesComponent[]>(this.uBASE_URL + '/dtvizmessages' + user).toPromise();
+            this.dtvizmessages = response;  // Adding data instantly
+            
+        }catch(error){
+            this.handleError("Unable to get messages");
+        }
 
+        }
+
+        async postMessage(dtm){
+        try{
+            var response = this.http.post(this.uBASE_URL + '/dtvizmessages', dtm).toPromise();
+            this.dtvizmessages.push(dtm);  // Adding data instantly
+        }catch(error){
+            this.handleError("Unable to post messages");
+        }
+
+        }
+
+    /* 
     getMessages(user){
         user = (user) ? '/'+user : '';
         // Subscribe using observables
+        //check = this.ht
+        //console.log('WATCH_THIS',this.http.get<DtvizmessagesComponent[]>(this.uBASE_URL + '/dtvizmessages' + user).toPromise());
         var response = this.http.get<DtvizmessagesComponent[]>(this.uBASE_URL + '/dtvizmessages' + user).subscribe(response => {
-            this.dtvizmessages = response;
-            this.dtmSubject.next(this.dtvizmessages);
+            this.dtvizmessagesStore = response;
+            //console.log('CHECK_HERE',this.dtvizmessagesStore);
+            this.dtmSubject.next(this.dtvizmessagesStore); // This is the get request
         },
             error => {
                 this.handleError("Unable get messages");
@@ -39,16 +70,19 @@ export class WebService {
             // Adding data instantly
     }
 
+    // FLOW:    MAKE MESSAGE STORE  --================-->  CALL OBSERVABLE NEXT TO NOTIFY THE SUBJECT
+
     postMessage(dtm){
         try{
             var response = this.http.post(this.uBASE_URL + '/dtvizmessages', dtm);
-            this.dtvizmessages.push(dtm);  // Adding data instantly
+            this.dtvizmessagesStore.push(dtm);  // Adding data instantly
+            this.dtmSubject.next(this.dtvizmessagesStore); // This is the put request
         }catch(error){
             this.handleError("Unable to post messages");
         }
         
     }
-
+    */
     // Use snack bar at bottom to add error message
     private handleError(error){
         console.log(error);
@@ -58,26 +92,5 @@ export class WebService {
 }
 
 
-//Using async and await
-// async getMessages(user){
-//     try{
-//         user = (user) ? '/'+user : '';
-//         var response = await this.http.get<DtvizmessagesComponent[]>(this.uBASE_URL + '/dtvizmessages' + user).toPromise();
-//         this.dtvizmessages = response;  // Adding data instantly
-        
-//     }catch(error){
-//         this.handleError("Unable to get messages");
-//     }
-    
-// }
 
-// async postMessage(dtm){
-//     try{
-//         var response = this.http.post(this.uBASE_URL + '/dtvizmessages', dtm).toPromise();
-//         this.dtvizmessages.push(dtm);  // Adding data instantly
-//     }catch(error){
-//         this.handleError("Unable to post messages");
-//     }
-    
-// }
 
