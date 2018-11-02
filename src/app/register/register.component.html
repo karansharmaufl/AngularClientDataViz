@@ -7,13 +7,14 @@
             <input style="width:400px" matInput placeholder="Last Name" formControlName="lastName"> 
         </mat-form-field><br/>
         <mat-form-field>
-            <input style="width:400px" type="email" matInput placeholder="Email" formControlName="emailID">
+            <input style="width:400px" type="email" email="true" matInput placeholder="Email" formControlName="emailID">
         </mat-form-field><br/>
         <mat-form-field>
             <input style="width:400px" type="password" matInput placeholder="Password" formControlName="password">
         </mat-form-field><br/>
         <mat-form-field>
             <input style="width:400px" type="password" matInput placeholder="Confirm Password" formControlName="confirmPassword">
+            <span *ngIf="form.errors?.mismatchedFields">Passwords do not match</span>
         </mat-form-field><br/>
         <button mat-raised-button color="primary">Register</button>
     </form>
