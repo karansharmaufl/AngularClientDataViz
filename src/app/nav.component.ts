@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
         <mat-toolbar color="primary">
             <button mat-button routerLink="/">RtDataViz</button>
             <button mat-button routerLink="/dtvizmessages">DTMessages</button>
+            <button mat-button routerLink="/register">Register</button>
         </mat-toolbar>
         
     `

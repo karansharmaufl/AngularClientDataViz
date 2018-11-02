@@ -9,6 +9,7 @@ import { NavComponent } from  './nav.component';
 import { HomeComponent } from  './home.component';
 import { RegisterComponent } from './register/register.component';
 
+
 import { 
   MatButtonModule,
   MatCardModule,
@@ -40,6 +41,7 @@ var routes = [
 
 import { AppComponent } from './app.component';
 import { WebService } from './web.service';
+import { AuthenticationService } from './authentication.service';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -66,7 +68,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [WebService],
+  providers: [WebService, AuthenticationService],
   bootstrap: [AppComponent],
   
 })

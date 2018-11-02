@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, EmailValidator } from '@angular/forms';
+import { AuthenticationService } from '../authentication.service'
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,7 @@ export class RegisterComponent{
 
 
   // Creating the form group model here
-  constructor(private fbuilder: FormBuilder) {
+  constructor(private fbuilder: FormBuilder, private authsvc : AuthenticationService) {
       this.form = fbuilder.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
@@ -26,6 +27,7 @@ export class RegisterComponent{
     // FORM GROUP FORMAT: group('MODEL', 'N_NUMBER_VALIDATORS') 
       onSubmit(){
         console.log(this.form.errors);
+        this.authsvc.register(this.form.value); // Passing in the current user
       }
 
      confirmPassword(pwd, cpwd){
