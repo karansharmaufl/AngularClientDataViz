@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DtvizmessagesComponent } from './dtvizmessages.component';
 import { NewDtvizmessagesComponent } from  './new-dtvizmessage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from  './nav.component';
 import { HomeComponent } from  './home.component';
+import { RegisterComponent } from './register/register.component';
+
 import { 
   MatButtonModule,
   MatCardModule,
@@ -27,6 +29,10 @@ var routes = [
   {
     path: 'dtvizmessages', 
     component: DtvizmessagesComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
   }
 ];
 
@@ -44,7 +50,8 @@ import { HttpClientModule } from '@angular/common/http';
     DtvizmessagesComponent, 
     NewDtvizmessagesComponent,
     NavComponent,
-    HomeComponent
+    HomeComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +63,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatToolbarModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [WebService],
