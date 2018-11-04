@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from  './nav.component';
 import { HomeComponent } from  './home.component';
 import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login.component';
+
 
 
 import { 
@@ -34,6 +36,10 @@ var routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 
@@ -53,7 +59,8 @@ import { HttpClientModule } from '@angular/common/http';
     NewDtvizmessagesComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

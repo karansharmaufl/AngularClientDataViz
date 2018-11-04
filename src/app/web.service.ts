@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { DtvizmessagesComponent } from './dtvizmessages.component';
 import { MatSnackBar } from '@angular/material';
 import { Subject } from 'rxjs';
+import { AuthenticationService } from './authentication.service';
 
 //import 'rxjs/add/operator/toPromise';
 //import { Observable } from 'rxjs/Observable';
@@ -25,7 +26,7 @@ export class WebService {
 
     // Using messages as subject -> WHen update through http request takes place
 
-    constructor(private http: HttpClient, private sb: MatSnackBar) {
+    constructor(private http: HttpClient, private sb: MatSnackBar, private authsvc : AuthenticationService) {
         //this.getMessages('');
      }
      
@@ -39,7 +40,6 @@ export class WebService {
         }catch(error){
             this.handleError("Unable to get messages");
         }
-
         }
 
         async postMessage(dtm){
@@ -51,6 +51,20 @@ export class WebService {
         }
 
         }
+
+
+        // START HERE
+        async getUser(){
+            var response = await this.http.get(this.uBASE_URL+'/users/me', this.authsvc.tokenHeader).toPromise();
+            console.log('RESPONSE', response);
+            return response;
+
+        }
+
+        // get tokenHeader(){
+        //     var header = new Headers()
+
+        // }
 
     /* 
     getMessages(user){
@@ -92,5 +106,6 @@ export class WebService {
 }
 
 
-
+// Important links
+//1. https://stackblitz.com/edit/angular-eqs6cp?file=app%2Fapp.component.html
 

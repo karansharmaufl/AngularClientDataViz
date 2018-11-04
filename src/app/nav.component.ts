@@ -11,8 +11,10 @@ import { Router } from '@angular/router';
             <button mat-button routerLink="/">RtDataViz</button>
             <button mat-button routerLink="/dtvizmessages">DTMessages</button>
             <span style="flex: 1 1 auto"></span>
-            <button mat-button routerLink="/register">Register</button>
-            <button *ngIf="authentication.isAuthenticated" mat-button routerLink="/register">Welcome {{authentication.name}}</button>
+            <button *ngIf="!authentication.isAuthenticated" mat-button routerLink="/login">Login</button>
+            <button *ngIf="!authentication.isAuthenticated" mat-button routerLink="/register">Register</button>
+            <button *ngIf="authentication.isAuthenticated" mat-button routerLink="/">Welcome {{authentication.name}}</button>
+            <button *ngIf="authentication.isAuthenticated" mat-button (click)="authentication.logout()">Logout</button>
         </mat-toolbar>
         
     `
