@@ -9,6 +9,7 @@ import { NavComponent } from  './nav.component';
 import { HomeComponent } from  './home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login.component';
+import { EditComponent } from './edit.component';
 
 
 
@@ -40,6 +41,10 @@ var routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'editDtm/:postId',
+    component: EditComponent
   }
 ];
 
@@ -60,7 +65,8 @@ import { HttpClientModule } from '@angular/common/http';
     NavComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

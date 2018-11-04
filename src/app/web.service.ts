@@ -4,7 +4,7 @@ import { DtvizmessagesComponent } from './dtvizmessages.component';
 import { MatSnackBar } from '@angular/material';
 import { Subject } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
-
+import { Router } from '@angular/router';
 //import 'rxjs/add/operator/toPromise';
 //import { Observable } from 'rxjs/Observable';
 //import { map, catchError } from 'rxjs/operators;
@@ -26,7 +26,7 @@ export class WebService {
 
     // Using messages as subject -> WHen update through http request takes place
 
-    constructor(private http: HttpClient, private sb: MatSnackBar, private authsvc : AuthenticationService) {
+    constructor(private http: HttpClient, private sb: MatSnackBar, private authsvc : AuthenticationService, private router : Router) {
         //this.getMessages('');
      }
      
@@ -36,7 +36,7 @@ export class WebService {
             user = (user) ? '/'+user : '';
             var response = await this.http.get<DtvizmessagesComponent[]>(this.uBASE_URL + '/dtvizmessages' + user).toPromise();
             this.dtvizmessages = response;  // Adding data instantly
-            
+            //console.log('MESSAGES_HERE', response);
         }catch(error){
             this.handleError("Unable to get messages");
         }
@@ -49,7 +49,43 @@ export class WebService {
         }catch(error){
             this.handleError("Unable to post messages");
         }
+        }
 
+        async editMessage(dtm){
+            console.log('DTM_INEDIT',dtm);
+            try{
+                var response = await this.http.put(this.uBASE_URL + '/dtvizmessages/'+dtm.id, dtm).toPromise();
+                const index: number = this.dtvizmessages.indexOf(dtm);
+                if (index !== -1) {
+                    this.dtvizmessages.splice(index, 1);
+                }
+                this.dtvizmessages.push(dtm);
+            }catch(error){
+                console.log('ERROR',error);
+                this.handleError("Unable to edit message");
+            }
+            this.router.navigateByUrl('/');
+        }
+
+        async deleteMessage(msg){
+            console.log('IAMHERE');
+            try{
+                var response = await this.http.delete(this.uBASE_URL + '/dtvizmessages/'+msg.id).toPromise();
+                console.log('MESSAGES_ARRAY_BD', this.dtvizmessages);
+
+                const index: number = this.dtvizmessages.indexOf(msg);
+                if (index !== -1) {
+                    this.dtvizmessages.splice(index, 1);
+                }     
+                console.log('MESSAGES_ARRAY_AD', this.dtvizmessages);
+                //var index = this.dtvizmessages.findIndex( msg => msg === msg)
+                //console.log('INDEX_HERE',index);
+                //var index = this.dtvizmessages.findIndex( msg => msg.id == key.id);
+                //console.log('LINK',this.uBASE_URL + '/dtvizmessages/'+id);
+                //console.log('DELETED_OBJECT_WITH', id);
+            }catch(error){
+                this.handleError("Something went wrong !!");
+            }
         }
 
 

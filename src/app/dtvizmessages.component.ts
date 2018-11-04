@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WebService } from './web.service';
-import { ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from './authentication.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 // Placeholder template
 
@@ -16,8 +17,11 @@ import { ActivatedRoute } from '@angular/router';
     selector: 'app-dtvizmessages',
     template: `
         <div *ngFor = "let dtm of webService.dtvizmessages">
-            <mat-card style="margin: 8px;">
-                <mat-card-title [routerLink]="['/dtvizmessages', dtm.owner]" style="cursor:pointer"> {{dtm.owner}} </mat-card-title>
+            <mat-card [style.background]="dtm.color" style="margin: 8px;">
+                <button *ngIf="messageFlag(dtm.ownerEmailID)" mat-button color="primary" (click)="editPost(dtm)">EDIT</button>
+                <button *ngIf="messageFlag(dtm.ownerEmailID)" mat-button color="primary" (click)="deletePost(dtm)">DELETE</button>
+                <mat-card-title [routerLink]="['/dtvizmessages', dtm.owner]" style="cursor:pointer"> {{dtm.owner}} ........created by {{dtm.ownerEmailID}} </mat-card-title>
+                <mat-card-content>{{dtm.topic}}</mat-card-content>
                 <mat-card-content>{{dtm.text}}</mat-card-content>
             </mat-card>
         </div>
@@ -28,7 +32,7 @@ export class DtvizmessagesComponent {
 
 
     // Activated Route added for routerLink used above in template
-    constructor(private webService : WebService, private route: ActivatedRoute) {}
+    constructor(private webService : WebService, private route: ActivatedRoute, private authsvc : AuthenticationService,private router : Router) {}
 
     dtvizmessages;
 
@@ -40,12 +44,34 @@ export class DtvizmessagesComponent {
         // Testing the function getUser
         var theUser= this.webService.getUser();
         console.log('THEUSER',theUser);
-        
+        console.log('ALL_MESSAGES_ARRAY',this.webService.getMessages(name));
         // Before done like this
         //this.webService.dtmSubject.subscribe(dtms => this.dtvizmessages);
         // After -- added more security observable subject not visible
         // this.webService.dtvizmessages.subscribe(dtms => 
         //     {this.dtvizmessages = dtms}
         //     );
+    }
+
+    messageFlag(postEmail)
+    {
+        var retVal
+        if(this.authsvc.emailID === postEmail){
+            retVal = true;
+        }else{
+            retVal = false;
+        }
+        //console.log('RETVAL',retVal);
+        return retVal;
+    }
+
+    deletePost(dtm){
+        //console.log('CALLED_ME',id);
+        this.webService.deleteMessage(dtm);
+    }
+
+    editPost(dtm){
+        console.log('CLICKED_ME');
+        this.router.navigateByUrl('/editDtm/'+dtm.id);
     }
 }

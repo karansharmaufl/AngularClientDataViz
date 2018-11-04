@@ -31,6 +31,10 @@ export class AuthenticationService {
         return localStorage.getItem(this.NAME_KEY);
     }
 
+    get emailID(){
+        return localStorage.getItem(this.EMAIL_KEY);
+    }
+
     get isAuthenticated() {
         return !!localStorage.getItem(this.TOKEN_KEY);
     }
