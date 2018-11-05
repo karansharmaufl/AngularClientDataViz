@@ -32,7 +32,7 @@ export class DtvizmessagesComponent {
         this.webService.getMessages(name);
 
         // Testing the function getUser
-        var theUser= this.webService.getUser();
+        //var theUser= this.webService.getUser();    ----------> Commented out
         //console.log('THEUSER',theUser);
         //console.log('ALL_MESSAGES_ARRAY',this.webService.getMessages(name));
         // Before done like this
