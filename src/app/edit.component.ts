@@ -18,6 +18,7 @@ import { Router, ActivatedRoute } from '@angular/router';
     selector: 'app-editmessage',
     template: `
     <mat-card class="card">
+        <mat-card-title>Edit</mat-card-title>
         <mat-card-content>
         <mat-form-field>
             <input [(ngModel)]="dtvizmessage.topic" matInput placeholder="Topic">
@@ -59,8 +60,7 @@ export class EditComponent {
         //console.log('ID',id);
         var allMsgs = this.webService.dtvizmessages;
         //console.log('ALLMSGS',JSON.stringify(allMsgs));
-        var arr = JSON.parse(JSON.stringify(allMsgs
-            ));
+        var arr = JSON.parse(JSON.stringify(allMsgs));
 
         var currDtm = arr.filter( dtm => dtm.id == id)[0];
         console.log('CRRTXT',currDtm);

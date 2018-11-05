@@ -35,7 +35,7 @@ export class NewDtvizmessagesComponent {
         ownerEmailID: this.authsvc.emailID,
         topic: "",
         text: "",
-        color: ""
+        color: "green"
     }
 
     post() {

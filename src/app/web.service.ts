@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { Subject } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
 import { Router } from '@angular/router';
+import { HubConnection } from '@aspnet/signalr';
 //import 'rxjs/add/operator/toPromise';
 //import { Observable } from 'rxjs/Observable';
 //import { map, catchError } from 'rxjs/operators;
@@ -24,9 +25,13 @@ export class WebService {
 
     dtvizmessages : DtvizmessagesComponent[]
 
+    private _hubConnection : HubConnection
+
     // Using messages as subject -> WHen update through http request takes place
 
-    constructor(private http: HttpClient, private sb: MatSnackBar, private authsvc : AuthenticationService, private router : Router) {
+    constructor(private http: HttpClient, private sb: MatSnackBar,
+         private authsvc : AuthenticationService, private router : Router
+         ) {
         //this.getMessages('');
      }
      
@@ -45,7 +50,8 @@ export class WebService {
         async postMessage(dtm){
         try{
             var response = this.http.post(this.uBASE_URL + '/dtvizmessages', dtm).toPromise();
-            this.dtvizmessages.push(dtm);  // Adding data instantly
+            console.log('POSTRESPONSE',response);
+            //this.dtvizmessages.push(dtm);  // Adding data instantly -- adding using signalr
         }catch(error){
             this.handleError("Unable to post messages");
         }
@@ -92,7 +98,7 @@ export class WebService {
         // START HERE
         async getUser(){
             var response = await this.http.get(this.uBASE_URL+'/users/me', this.authsvc.tokenHeader).toPromise();
-            console.log('RESPONSE', response);
+            //console.log('RESPONSE', response);
             return response;
 
         }

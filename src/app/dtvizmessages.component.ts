@@ -37,14 +37,14 @@ export class DtvizmessagesComponent {
     dtvizmessages;
 
     ngOnInit(){
-        console.log('ROUTE_HERE', this.route.snapshot.params.name);
+        //console.log('ROUTE_HERE', this.route.snapshot.params.name);
         var name = this.route.snapshot.params.name;
         this.webService.getMessages(name);
 
         // Testing the function getUser
         var theUser= this.webService.getUser();
-        console.log('THEUSER',theUser);
-        console.log('ALL_MESSAGES_ARRAY',this.webService.getMessages(name));
+        //console.log('THEUSER',theUser);
+        //console.log('ALL_MESSAGES_ARRAY',this.webService.getMessages(name));
         // Before done like this
         //this.webService.dtmSubject.subscribe(dtms => this.dtvizmessages);
         // After -- added more security observable subject not visible
