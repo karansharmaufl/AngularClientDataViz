@@ -34,6 +34,8 @@ export class WebService {
          ) {
         //this.getMessages('');
      }
+
+     
      
         //Using async and await
         async getMessages(user){
@@ -70,7 +72,7 @@ export class WebService {
                 console.log('ERROR',error);
                 this.handleError("Unable to edit message");
             }
-            this.router.navigateByUrl('/');
+            this.router.navigateByUrl('/dashboard');
         }
 
         async deleteMessage(msg){

@@ -210,6 +210,12 @@ MIT
 @angular/common
 MIT
 
+@angular/platform-browser
+MIT
+
+@angular/forms
+MIT
+
 tslib
 Apache-2.0
 Apache License
@@ -271,12 +277,6 @@ END OF TERMS AND CONDITIONS
 
 @aspnet/signalr
 Apache-2.0
-
-@angular/platform-browser
-MIT
-
-@angular/forms
-MIT
 
 @angular/animations
 MIT

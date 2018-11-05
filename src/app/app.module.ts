@@ -10,6 +10,7 @@ import { HomeComponent } from  './home.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login.component';
 import { EditComponent } from './edit.component';
+import { DashboardComponent } from './dashboard.component';
 
 
 
@@ -45,6 +46,10 @@ var routes = [
   {
     path: 'editDtm/:postId',
     component: EditComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent
   }
 ];
 
@@ -54,7 +59,6 @@ import { AppComponent } from './app.component';
 import { WebService } from './web.service';
 import { AuthenticationService } from './authentication.service';
 import { HttpClientModule } from '@angular/common/http';
-import { SampleCmpntComponent } from './sample-cmpnt/sample-cmpnt.component';
 
 
 
@@ -68,7 +72,7 @@ import { SampleCmpntComponent } from './sample-cmpnt/sample-cmpnt.component';
     RegisterComponent,
     LoginComponent,
     EditComponent,
-    SampleCmpntComponent
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

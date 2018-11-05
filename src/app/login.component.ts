@@ -7,7 +7,9 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-login',
     template: `
+    <br/>
     <mat-card>
+        <mat-card-title>Login</mat-card-title>
         <mat-form-field>
             <input style="width:400px" matInput [(ngModel)]="loginData.email" placeholder="Email" type="email">
         </mat-form-field><br/>

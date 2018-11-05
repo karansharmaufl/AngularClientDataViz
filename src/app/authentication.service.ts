@@ -27,7 +27,7 @@ export class AuthenticationService {
         localStorage.setItem(this.TOKEN_KEY, response['token']);
         localStorage.setItem(this.NAME_KEY, response['firstName']);
         localStorage.setItem(this.EMAIL_KEY, response['emailID']);
-        this.router.navigate(['/']); // This is used for redirection after successfull registration or login
+        this.router.navigate(['/dashboard']); // This is used for redirection after successfull registration or login
     }
 
     get name(){
@@ -73,6 +73,7 @@ export class AuthenticationService {
         localStorage.removeItem(this.NAME_KEY);
         localStorage.removeItem(this.EMAIL_KEY);
         localStorage.removeItem(this.TOKEN_KEY);
+        this.router.navigate(['/']);
     }
 
     async register(user) {
