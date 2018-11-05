@@ -13,8 +13,8 @@ import { HubConnection } from '@aspnet/signalr';
 @Injectable()
 export class WebService {
     
-    uBASE_URL = 'http://localhost:5000/api';
-
+    //uBASE_URL = 'http://localhost:5000/api';
+    uBASE_URL = 'https://redataviz20181105061447.azurewebsites.net/api';
     
 
     //private dtmSubject = new Subject();
