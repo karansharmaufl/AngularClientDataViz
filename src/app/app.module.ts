@@ -54,6 +54,7 @@ import { AppComponent } from './app.component';
 import { WebService } from './web.service';
 import { AuthenticationService } from './authentication.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SampleCmpntComponent } from './sample-cmpnt/sample-cmpnt.component';
 
 
 
@@ -66,7 +67,8 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    EditComponent
+    EditComponent,
+    SampleCmpntComponent
   ],
   imports: [
     BrowserModule,

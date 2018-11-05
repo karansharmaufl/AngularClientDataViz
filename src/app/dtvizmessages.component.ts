@@ -15,24 +15,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-dtvizmessages',
-    template: `
-        <div *ngFor = "let dtm of webService.dtvizmessages">
-            <mat-card [style.background]="dtm.color" style="margin: 8px;">
-                <button *ngIf="messageFlag(dtm.ownerEmailID)" mat-button color="primary" (click)="editPost(dtm)">EDIT</button>
-                <button *ngIf="messageFlag(dtm.ownerEmailID)" mat-button color="primary" (click)="deletePost(dtm)">DELETE</button>
-                <mat-card-title [routerLink]="['/dtvizmessages', dtm.owner]" style="cursor:pointer"> {{dtm.owner}} ........created by {{dtm.ownerEmailID}} </mat-card-title>
-                <mat-card-content>{{dtm.topic}}</mat-card-content>
-                <mat-card-content>{{dtm.text}}</mat-card-content>
-            </mat-card>
-        </div>
-    `
+    templateUrl: './dtvizmessages.component.html' 
 })
 
 export class DtvizmessagesComponent {
 
 
     // Activated Route added for routerLink used above in template
-    constructor(private webService : WebService, private route: ActivatedRoute, private authsvc : AuthenticationService,private router : Router) {}
+    constructor(public webService : WebService, private route: ActivatedRoute, private authsvc : AuthenticationService,private router : Router) {}
 
     dtvizmessages;
 

@@ -21,5 +21,5 @@ import { Router } from '@angular/router';
 })
 
 export class NavComponent {
-    constructor(private authentication : AuthenticationService, private router : Router) {}
+    constructor(public authentication : AuthenticationService, private router : Router) {}
 }
