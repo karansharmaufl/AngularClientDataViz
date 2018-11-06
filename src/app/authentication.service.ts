@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
     constructor(private http : HttpClient, private sb : MatSnackBar, private router : Router){}
 
-    uBASE_URL = 'http://localhost:5000/authentication';
-    //uBASE_URL = 'https://redataviz20181105061447.azurewebsites.net/authentication';
+    //uBASE_URL = 'http://localhost:5000/authentication';
+    uBASE_URL = 'https://redataviz20181105061447.azurewebsites.net/authentication';
 
     NAME_KEY = 'firstName';
     TOKEN_KEY = 'tokenKey';
