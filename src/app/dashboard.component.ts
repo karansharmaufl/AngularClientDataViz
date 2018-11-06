@@ -4,6 +4,7 @@ import { NewDtvizmessagesComponent } from './new-dtvizmessage.component';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 import * as signalR from '@aspnet/signalr';
 import { WebService } from './web.service';
+import { NavComponent } from './nav.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,7 +24,7 @@ export class DashboardComponent {
   constructor(private wbsc: WebService) { }
 
   ngOnInit() {
-    console.log('HELLOWORLD');
+    //console.log('HELLOWORLD');
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
 
@@ -34,7 +35,6 @@ export class DashboardComponent {
     this._hubConnection = new HubConnectionBuilder()
                           .configureLogging(signalR.LogLevel.Debug)
                           .withUrl('https://redataviz20181105061447.azurewebsites.net/notify',
-
                           {
                             skipNegotiation : true,
                             transport:signalR.HttpTransportType.WebSockets

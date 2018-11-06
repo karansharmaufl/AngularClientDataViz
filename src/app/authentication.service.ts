@@ -17,16 +17,33 @@ export class AuthenticationService {
     TOKEN_KEY = 'tokenKey';
     EMAIL_KEY = 'emailID'
 
+    disAppName = 'RTDV'
+
+    display(bAuth){
+        //console.log('DISPLAY_ME');
+        var _router = this.router;
+        if(bAuth){
+            //console.log('AUTH');
+            this.disAppName = 'Welcome ' + this.name;
+            _router.navigateByUrl('/dashboard');
+        }else{
+            //console.log('NOT_AUTH');
+            this.disAppName = 'RTDV';
+            _router.navigateByUrl('/');
+        }
+    }
 
     authenticateUser(response){  // Store the token in local storage
         if(!response['token']){
-            console.log('TOKEN_NOT_VALID');
+            //console.log('TOKEN_NOT_VALID');
+            this.display(false);
             this.sb.open('Invalid Token', 'close', {duration : 2000});
             return;
         }
         localStorage.setItem(this.TOKEN_KEY, response['token']);
         localStorage.setItem(this.NAME_KEY, response['firstName']);
         localStorage.setItem(this.EMAIL_KEY, response['emailID']);
+        this.display(true);
         this.router.navigate(['/dashboard']); // This is used for redirection after successfull registration or login
     }
 
@@ -73,6 +90,7 @@ export class AuthenticationService {
         localStorage.removeItem(this.NAME_KEY);
         localStorage.removeItem(this.EMAIL_KEY);
         localStorage.removeItem(this.TOKEN_KEY);
+        this.display(false);
         this.router.navigate(['/']);
     }
 
