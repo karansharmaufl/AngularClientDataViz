@@ -91,9 +91,10 @@ export class AuthenticationService {
 
             if(response['ackMessage']==='Microsoft.EntityFrameworkCore.DbUpdateException'){
                 return this.sb.open('EmailID Error:', 'Email id already exists ', {duration : 4000});
+            }else{
+                this.authenticateUser(response);
             }
-            //if(response.)
-            this.authenticateUser(response);
+            
         }catch(error){
             //console.log('ERROR HERE', error);
             this.handleError("check username and password");
