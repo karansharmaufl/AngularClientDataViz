@@ -18,15 +18,15 @@ export class RegisterComponent{
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
         emailID: ['', [Validators.required, this.validateEmail]],
-        password:['', Validators.required],
+        passsword:['', Validators.required],
         confirmPassword:['', Validators.required]
-      }, { validator: this.confirmPassword('password', 'confirmPassword')})
+      }, { validator: this.confirmPassword('passsword', 'confirmPassword')})
     }
 
     // VALIDATOR FORMAT ['initialValue', 'validator']
     // FORM GROUP FORMAT: group('MODEL', 'N_NUMBER_VALIDATORS') 
       onSubmit(){
-        console.log(this.form.errors);
+        //console.log('ERRORS',this.form.errors);
         this.authsvc.register(this.form.value); // Passing in the current user
       }
 

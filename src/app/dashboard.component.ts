@@ -33,7 +33,7 @@ export class DashboardComponent {
 
     this._hubConnection = new HubConnectionBuilder()
                           .configureLogging(signalR.LogLevel.Debug)
-                          .withUrl('https://redataviz20181105061447.azurewebsites.net/notify',
+                          .withUrl('http://localhost:5000/notify',
                           {
                             skipNegotiation : true,
                             transport:signalR.HttpTransportType.WebSockets

@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
     constructor(private http : HttpClient, private sb : MatSnackBar, private router : Router){}
 
-    //uBASE_URL = 'http://localhost:5000/authentication';
-    uBASE_URL = 'https://redataviz20181105061447.azurewebsites.net/authentication';
+    uBASE_URL = 'http://localhost:5000/authentication';
+    //uBASE_URL = 'https://redataviz20181105061447.azurewebsites.net/authentication';
 
     NAME_KEY = 'firstName';
     TOKEN_KEY = 'tokenKey';
@@ -77,13 +77,26 @@ export class AuthenticationService {
     }
 
     async register(user) {
+        //console.log('USER_COMMLATER',user);
+        if(user.firstName===''||user.lastName===''||user.emailID===''||user.password===''){
+            this.sb.open('ERROR','Please complete the form',{duration:4000});
+            return;
+        }
+
         try{
             delete user.confirmPassword;
+            //console.log('USER_HERE', user);
             var response =  await this.http.post(this.uBASE_URL + '/register', user).toPromise();
-            console.log('RESPONSE', response);
+            console.log('RESPONSE', response['ackMessage']);
+
+            if(response['ackMessage']==='Microsoft.EntityFrameworkCore.DbUpdateException'){
+                return this.sb.open('EmailID Error:', 'Email id already exists ', {duration : 4000});
+            }
+            //if(response.)
             this.authenticateUser(response);
         }catch(error){
-            this.handleError(error);
+            //console.log('ERROR HERE', error);
+            this.handleError("check username and password");
         }
 
     }

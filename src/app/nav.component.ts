@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
             <span style="flex: 1 1 auto"></span>
             <button *ngIf="!authentication.isAuthenticated" mat-button routerLink="/login">Login</button>
             <button *ngIf="!authentication.isAuthenticated" mat-button routerLink="/register">Register</button>
-            <button *ngIf="authentication.isAuthenticated" mat-button routerLink="/dashboard">Welcome {{authentication.emailID}}</button>
+            <button *ngIf="authentication.isAuthenticated" mat-button routerLink="/dashboard">Welcome {{authentication.name}}</button>
             <button *ngIf="authentication.isAuthenticated" mat-button (click)="authentication.logout()">Logout</button>
         </mat-toolbar>
         
@@ -31,7 +31,7 @@ export class NavComponent {
             _router.navigateByUrl('/dashboard');
         }else{
             console.log('NOT_AUTH');
-            _router.navigate['/']
+            _router.navigateByUrl('/');
         }
     }
 }

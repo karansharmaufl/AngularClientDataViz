@@ -8,16 +8,18 @@ import { Router } from '@angular/router';
     selector: 'app-login',
     template: `
     <br/>
+    
     <mat-card>
         <mat-card-title>Login</mat-card-title>
         <mat-form-field>
-            <input style="width:400px" matInput [(ngModel)]="loginData.email" placeholder="Email" type="email">
+            <input style="width:100%" matInput [(ngModel)]="loginData.email" placeholder="Email" type="email">
         </mat-form-field><br/>
         <mat-form-field>
-            <input style="width:400px" matInput [(ngModel)]="loginData.password" placeholder="Password" type="password"> 
+            <input style="width:100%" matInput [(ngModel)]="loginData.password" placeholder="Password" type="password"> 
         </mat-form-field><br/>
         <button mat-raised-button color="primary" (click)="login()">Login</button>
     </mat-card>
+
         `
 })
 
