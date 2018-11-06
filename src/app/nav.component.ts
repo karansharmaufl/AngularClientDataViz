@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
     selector: 'app-nav',
     template: `
         <mat-toolbar color="primary">
-            <button mat-button (click)="display()">RtDataViz</button>
-            <button *ngIf="authentication.isAuthenticated" mat-button routerLink="/dtvizmessages">DTMessages</button>
+            <button mat-button (click)="display()">RTDV</button>
+            <button *ngIf="authentication.isAuthenticated" mat-button routerLink="/dtvizmessages">DTMS</button>
             <span style="flex: 1 1 auto"></span>
             <button *ngIf="!authentication.isAuthenticated" mat-button routerLink="/login">Login</button>
             <button *ngIf="!authentication.isAuthenticated" mat-button routerLink="/register">Register</button>
